@@ -20,6 +20,9 @@ CONFFILE = '/etc/ushare.conf'
 
 class Ushare_gui(object):
     def __init__(self):
+        if os.getuid() != 0:
+            self.error_dialog("Please restart Ushare-gui as root (sudo...)",None)
+            exit()
         ## set the gladexml file
         gladexml = gtk.glade.XML(GLADE_FILE, None ,APP_NAME)
         ## the main window and properties
@@ -46,7 +49,7 @@ class Ushare_gui(object):
         self.treeview = gtk.TreeView()
         self.treeview.set_model(self.model)
         renderer = gtk.CellRendererText()
-        titleColumn = gtk.TreeViewColumn("Directories", renderer, text=0)
+        titleColumn = gtk.TreeViewColumn("", renderer, text=0)
         self.treeview.append_column(titleColumn)
         titleColumn.set_sort_column_id(1)
         self.scrollview.add(self.treeview)
@@ -185,7 +188,11 @@ class Ushare_gui(object):
     def restartUshare(self,widget=None):
         ## kill all process since ushare often let active processes...
         os.system("killall -9 ushare")
-        os.system("/etc/init.d/ushare start")
+        pipe = os.popen("/etc/init.d/ushare start")
+        rc = pipe.close()
+        if rc != None or rc == 256:
+            self.error_dialog("Can't restart ushare...", self.window)
+            return
         self.get_ushare_state()
         
     def on_option_toggled(self,widget):
