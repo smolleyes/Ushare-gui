@@ -188,9 +188,8 @@ class Ushare_gui(object):
     def restartUshare(self,widget=None):
         ## kill all process since ushare often let active processes...
         os.system("killall -9 ushare")
-        pipe = os.popen("/etc/init.d/ushare start")
-        rc = pipe.close()
-        if rc != None or rc == 256:
+        cmd = os.system("/etc/init.d/ushare start")
+        if cmd == 1:
             self.error_dialog("Can't restart ushare...", self.window)
             return
         self.get_ushare_state()
