@@ -6,7 +6,6 @@ import gtk
 import gtk.glade
 import os
 from configobj import ConfigObj
-import gksu2
 
 exec_path =  os.path.dirname(os.path.abspath(__file__))
 data_path =  os.path.join(exec_path,"data")
