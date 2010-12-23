@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ -e "/usr/bin/gksu" ]; then
+	AGUI="gksu"
+elif [ -e "/usr/bin/kdesu" ]; then
+	AGUI="kdesu"
+else
+	AGUI="sudo xterm -e" 
+fi
+
+$AGUI ushare-gui

@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 7), python-support (>= 0.8.4), python-distutils-ext
 Standards-Version: 3.8.4
 XS-Python-Version: current
 
-Package: python-ushare-gui
+Package: ushare-gui
 Architecture: all
 Depends: ${misc:Depends}, ${python:Depends}, python-glade2, python-configobj
 XB-Python-Version: ${python:Versions}

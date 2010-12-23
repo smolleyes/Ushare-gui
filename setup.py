@@ -63,7 +63,7 @@ setup(
 	author_email='s.lagui@free.fr',
 	url='http://penguincape.org',
 	packages=packages,
-	scripts=['ushare-gui'],
+	scripts=['ushare-gui','ushare-start'],
 	data_files=data_files,
 	cmdclass={
 		'uninstall': uninstall,

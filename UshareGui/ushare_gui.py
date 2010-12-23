@@ -8,8 +8,10 @@ import os
 from configobj import ConfigObj
 
 exec_path =  os.path.dirname(os.path.abspath(__file__))
-if ('/usr' in exec_path):
+if ('/usr/local/lib' in exec_path):
     data_path = '/usr/local/share/ushare-gui/data'
+elif ('/usr/lib' in exec_path):
+    data_path = '/usr/share/ushare-gui/data'
 else:
     data_path =  os.path.join(exec_path,"../data")
 img_path = os.path.join(data_path,"img")
