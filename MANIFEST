@@ -1,0 +1,14 @@
+ushare-gui
+setup.py
+VERSION
+COPYRIGHT
+ushare-gui.desktop
+UshareGui/__init__.py
+UshareGui/ushare_gui.py
+data/img/no.png
+data/img/usable.png
+data/glade/gui.glade
+images/22x22/usharegui.png
+images/24x24/usharegui.png
+images/32x32/usharegui.png
+images/48x48/usharegui.png

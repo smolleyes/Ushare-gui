@@ -8,7 +8,10 @@ import os
 from configobj import ConfigObj
 
 exec_path =  os.path.dirname(os.path.abspath(__file__))
-data_path =  os.path.join(exec_path,"data")
+if ('/usr' in exec_path):
+    data_path = '/usr/local/share/ushare-gui/data'
+else:
+    data_path =  os.path.join(exec_path,"../data")
 img_path = os.path.join(data_path,"img")
 inactive_img = os.path.join(img_path,"no.png")
 active_img = os.path.join(img_path,'usable.png') 
@@ -29,6 +32,7 @@ class Ushare_gui(object):
         self.window.set_resizable(1)
         self.window.set_default_size(500,500)
         self.window.set_position("center")
+        self.window.set_icon_from_file(os.path.join(img_path,'usharegui.png'))
         ## ushare state
         self.ushare_state_label = gladexml.get_widget("ushare_state_label")
         self.ushare_state_img = gladexml.get_widget("ushare_state_img")
@@ -57,7 +61,6 @@ class Ushare_gui(object):
         ## connect glade signals
         dic = {"on_main_window_delete" : gtk.main_quit,
                "on_quit_btn_clicked" : gtk.main_quit,
-               "on_save_btn_clicked" : self.saveConfig,
                "on_restart_btn_clicked" : self.restartUshare,
                "on_enable_telnet_toggled" : self.on_option_toggled,
                "on_enable_web_toggled" : self.on_option_toggled,
@@ -73,6 +76,8 @@ class Ushare_gui(object):
         self.readConf()
         ## check ushare state
         self.get_ushare_state()
+        ## start
+        gtk.main()
         
     def get_ushare_state(self):
         self.state = os.popen('ps ax | grep [b]in/ushare').readlines()
@@ -152,7 +157,7 @@ class Ushare_gui(object):
             self.error_dialog("Can't write the /etc/ushare.conf file,\nPlease restart Ushare-gui as root)", self.window)
         return config
     
-    def saveConfig(self,widget):
+    def saveConfig(self,widget=None):
         config = ConfigObj(write_empty_values=True)
         config.filename = CONFFILE
         config["USHARE_NAME"]=self.ushare_name_entry.get_text() 
@@ -182,7 +187,8 @@ class Ushare_gui(object):
             self.error_dialog("Can't write the /etc/ushare.conf file,\nPlease restart Ushare-gui as root)", self.window)
             return False
         os.system("sed -i 's/ = /=/g;s/, /,/g;s/True/TRUE/g;s/False//g' %s" % CONFFILE)
-        return True
+        ## restart ushare
+        return self.restartUshare()
             
     def restartUshare(self,widget=None):
         ## kill all process since ushare often let active processes...
@@ -209,6 +215,7 @@ class Ushare_gui(object):
         self.model.set(self.iter,
                        0, path,
                        )
+        return self.saveConfig()
     
     def add_new_path(self,widget):
         buttons     = (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
@@ -228,10 +235,11 @@ class Ushare_gui(object):
         if not os.path.exists(path):
             print "wrong path selected... %s do not exist" % path 
             return
-        self.add_path(path)
+        return self.add_path(path)
         
     def remove_path(self,widget):
         self.model.remove(self.iter)
+        return self.saveConfig()
         
     def error_dialog(self,message, parent = None):
         """Displays an error message."""
@@ -244,6 +252,5 @@ class Ushare_gui(object):
 
 if __name__ == "__main__":
     Ushare_gui()
-    gtk.main()
     
         

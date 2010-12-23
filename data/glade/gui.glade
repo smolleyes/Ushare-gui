@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <glade-interface>
   <!-- interface-requires gtk+ 2.16 -->
   <!-- interface-naming-policy project-wide -->
@@ -85,7 +85,7 @@
                               <widget class="GtkEntry" id="ushare_name">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="invisible_char">&#x25CF;</property>
+                                <property name="invisible_char">●</property>
                               </widget>
                               <packing>
                                 <property name="position">1</property>
@@ -117,7 +117,7 @@
                               <widget class="GtkEntry" id="ushare_iface">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="invisible_char">&#x25CF;</property>
+                                <property name="invisible_char">●</property>
                               </widget>
                               <packing>
                                 <property name="position">1</property>
@@ -150,7 +150,7 @@
                                 <property name="width_request">80</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="invisible_char">&#x25CF;</property>
+                                <property name="invisible_char">●</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
@@ -244,7 +244,7 @@
                                 <property name="width_request">80</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
-                                <property name="invisible_char">&#x25CF;</property>
+                                <property name="invisible_char">●</property>
                               </widget>
                               <packing>
                                 <property name="expand">False</property>
@@ -402,6 +402,9 @@
               <widget class="GtkHBox" id="hbox3">
                 <property name="visible">True</property>
                 <child>
+                  <placeholder/>
+                </child>
+                <child>
                   <widget class="GtkButton" id="restart_btn">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -452,22 +455,6 @@
                     <property name="expand">False</property>
                     <property name="pack_type">end</property>
                     <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="GtkButton" id="save_btn">
-                    <property name="label">gtk-save</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="use_stock">True</property>
-                    <signal name="clicked" handler="on_save_btn_clicked"/>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="padding">3</property>
-                    <property name="pack_type">end</property>
-                    <property name="position">0</property>
                   </packing>
                 </child>
               </widget>

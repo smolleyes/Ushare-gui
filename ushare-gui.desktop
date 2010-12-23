@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Ushare-gui
+Comment=Gui for ushare upnp server
+Exec=ushare-gui
+Icon=ushare-gui
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Categories=Application;Internet;Network
